@@ -1,7 +1,7 @@
 #!/bin/bash
 
 hostname=`hostname`
-gateway_ip="192.168.20.1"
+gateway_ip="192.168.122.1"
 domain=foo
 
 function get_ip {
