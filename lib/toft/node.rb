@@ -49,7 +49,6 @@ CQWv13UgQjiHgQILXSb7xdzpWK1wpDoqIEWQugRyPQDeZhPWVbB4Lg==
       @netmask = options[:netmask]
       unless exists?
         conf_file = generate_lxc_config
-        puts "lxc-create -n #{hostname} -f #{conf_file} -t #{options[:type].to_s}" 
         cmd! "lxc-create -n #{hostname} -f #{conf_file} -t #{options[:type].to_s}" 
       end
       @chef_runner = Toft::Chef::ChefRunner.new("#{rootfs}") do |chef_command|
@@ -207,7 +206,7 @@ CQWv13UgQjiHgQILXSb7xdzpWK1wpDoqIEWQugRyPQDeZhPWVbB4Lg==
       conf = <<-EOF
 lxc.network.type = veth
 lxc.network.flags = up
-lxc.network.link = virbr0
+lxc.network.link = br0
 lxc.network.name = eth0
 lxc.network.ipv4 = #{full_ip}
       EOF
@@ -219,8 +218,7 @@ lxc.network.ipv4 = #{full_ip}
     end
     
     def fqdn
-      #"#{@hostname}.#{Toft::DOMAIN}"
-      @ip
+      "#{@hostname}.#{Toft::DOMAIN}"
     end
   end
   
